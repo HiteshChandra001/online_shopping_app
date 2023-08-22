@@ -1,11 +1,22 @@
 package com.masai.shopnest.entity;
 
 import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+import jakarta.persistence.ManyToOne;
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 
 @Entity
+@Data
+@AllArgsConstructor
+@NoArgsConstructor
 public class Product {
-	
-	private String productId;
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	private int productId;
 	
 	private String productName;
 	
@@ -18,6 +29,9 @@ public class Product {
 	private String specification;
 	
 	private int quantity;
+	
+	@ManyToOne
+	private Category category;
 	
 	
 

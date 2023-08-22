@@ -12,22 +12,18 @@ import lombok.NoArgsConstructor;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class Address {
+public class Customer {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private int addressId;
+	private int customerId;
 
-	private String streetNo;
+	private String firstName;
 
-	private String buildingName;
+	private String lastName;
 
-	private String city;
+	private String mobileNumber;
 
-	private String state;
-
-	private String country;
-
-	private String pincode;
+	private String email;
 
 }
