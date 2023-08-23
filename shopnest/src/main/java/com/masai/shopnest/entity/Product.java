@@ -1,5 +1,6 @@
 package com.masai.shopnest.entity;
 
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -30,7 +31,7 @@ public class Product {
 	
 	private int quantity;
 	
-	@ManyToOne
+	@ManyToOne(cascade = CascadeType.ALL)
 	private Category category;
 	
 	
