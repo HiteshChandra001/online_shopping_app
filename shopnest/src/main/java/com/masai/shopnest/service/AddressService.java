@@ -14,8 +14,8 @@ public interface AddressService {
 	public Address removeAddress(Address address);
 	
 	
-	public List<Address> viewAllAddress(Integer id);
+//	public List<Address> viewAllAddress(Integer id);
 	
-	public Address viewAddress(Address address);
+	public Address viewAddress(Integer id);
 	
 }

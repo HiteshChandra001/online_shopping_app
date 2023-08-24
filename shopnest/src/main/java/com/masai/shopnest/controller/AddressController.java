@@ -45,16 +45,12 @@ public class AddressController {
 		return new ResponseEntity<Address>(addressService.updateAddress(address),HttpStatus.OK);
 	}
 	
-	@GetMapping("/addresses")
-	public ResponseEntity<List<Address>> getAllAddress(@RequestBody Address address  )
-	{
-		return null;
-	}
+	
 	
 	@GetMapping("/address/{id}")
 	public ResponseEntity<Address> viewAddressById(@PathVariable Integer id)
 	{
-//		return new ResponseEntity<Address>(addressService.viewAllAddress(id),HttpStatus.OK);
-		return null;
+		return new ResponseEntity<Address>(addressService.viewAddress(id),HttpStatus.OK);
+//		return null;
 	}
 }

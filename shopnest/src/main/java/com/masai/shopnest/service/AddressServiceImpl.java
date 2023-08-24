@@ -21,8 +21,8 @@ public class AddressServiceImpl implements AddressService {
 
 	@Override
 	public Address addAddress(Address address) {
-		addressRepository.save(address);
-		return null;
+		
+		return addressRepository.save(address);
 	}
 
 	@Override
@@ -40,16 +40,13 @@ public class AddressServiceImpl implements AddressService {
 		return address;
 	}
 
-	@Override
-	public List<Address> viewAllAddress(Integer id) {
-		
-		return null;
-	}
+	
 
 	@Override
-	public Address viewAddress(Address address) {
-		// TODO Auto-generated method stub
-		return null;
+	public Address viewAddress(Integer id) {
+		
+		Address up=addressRepository.findById(id).orElseThrow(() -> new  ShopnestException("Address Doesnot Exist"));
+		return up;
 	}
 
 }
