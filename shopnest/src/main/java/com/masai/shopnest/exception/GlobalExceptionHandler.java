@@ -23,5 +23,12 @@ public class GlobalExceptionHandler {
 		return new ResponseEntity<ExceptionDetails>(ed,HttpStatus.BAD_REQUEST);
 	}
 	
+	@ExceptionHandler(NotFoundException.class)
+	public ResponseEntity<ExceptionDetails> notFound(NotFoundException ex,WebRequest wr){
+		ExceptionDetails ed=new ExceptionDetails(LocalDateTime.now(),ex.getMessage(),wr.getDescription(false));
+		return new ResponseEntity<ExceptionDetails>(ed,HttpStatus.NOT_FOUND);
+	}
+	
+	
 	
 }
