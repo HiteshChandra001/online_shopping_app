@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="adminStyles.css">
+    <title>ShopNest Admin Dashboard</title>
+</head>
+<body>
+    <div class="container">
+        <h1>ShopNest Admin Dashboard</h1>
+
+        <!-- Product Management Section -->
+        <div class="section">
+            <h2>Product Management</h2>
+            <button onclick="displayForm('addProductForm')">Add Product</button>
+            <button onclick="displayForm('updateProductForm')">Update Product</button>
+            <button onclick="displayForm('removeProductForm')">Remove Product</button>
+            <button onclick="fetchAndDisplayAllProducts()">View All Products</button>
+        </div>
+
+        <div id="formContainer"></div>
+
+        <div id="productsDisplay"></div>
+
+    </div>
+
+    <script src="adminScripts.js"></script>
+</body>
+</html>
