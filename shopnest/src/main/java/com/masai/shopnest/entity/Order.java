@@ -3,7 +3,6 @@ package com.masai.shopnest.entity;
 import java.time.LocalDate;
 import java.util.Map;
 
-import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -16,9 +15,9 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 @Entity
-@Data
-@AllArgsConstructor
 @NoArgsConstructor
+@AllArgsConstructor
+@Data
 @Table(name = "order_entity")
 public class Order {
 
@@ -30,7 +29,7 @@ public class Order {
 	
 	private String orderStatus;
 	
-	@OneToMany(cascade = CascadeType.ALL)
+	@OneToMany
 	private Map<Integer, Product> productList;
 	
 	@OneToOne

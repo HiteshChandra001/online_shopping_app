@@ -15,7 +15,6 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.masai.shopnest.entity.Product;
 import com.masai.shopnest.service.ProductService;
-
 @RestController
 public class ProductController {
 
