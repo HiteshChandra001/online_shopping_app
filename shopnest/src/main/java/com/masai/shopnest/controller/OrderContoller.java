@@ -19,7 +19,6 @@ import com.masai.shopnest.service.OrderService;
 import jakarta.persistence.Entity;
 import jakarta.validation.Valid;
 
-
 @RestController
 public class OrderContoller {
 
