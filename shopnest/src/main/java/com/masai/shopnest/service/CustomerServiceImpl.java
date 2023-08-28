@@ -58,9 +58,16 @@ public class CustomerServiceImpl implements CustomerService {
 	}
 
 	@Override
-	public Customer getCustomerByUserID(String userId) {
-		return customerRepository.findByuserId(userId).orElseThrow(() -> new NotFoundException("Invalid Customer ID"));
+	public Customer getCustomerByUserID(String email) {
+		return customerRepository.findByEmail(email).orElseThrow(() -> new NotFoundException("Invalid Customer ID"));
 
+	}
+
+	@Override
+	public Customer getCustomerDetailsByEmail(String email) {
+		
+		return customerRepository.findByEmail(email).orElseThrow(()-> new NotFoundException("User Not Found"));
+		
 	}
 
 }

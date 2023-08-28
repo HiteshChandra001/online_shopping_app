@@ -3,6 +3,7 @@ package com.masai.shopnest.controller;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -15,6 +16,7 @@ import com.masai.shopnest.entity.Address;
 import com.masai.shopnest.service.AddressService;
 
 @RestController
+@CrossOrigin(origins = "*")
 public class AddressController {
 
 	private AddressService addressService;
