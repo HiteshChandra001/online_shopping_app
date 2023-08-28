@@ -17,5 +17,7 @@ public interface CustomerService {
 	public List<Customer> viewAllCustomer(String location);
 	
   public Customer getCustomerByUserID(String userId);
+  
+  public Customer getCustomerDetailsByEmail(String email);
 
 }

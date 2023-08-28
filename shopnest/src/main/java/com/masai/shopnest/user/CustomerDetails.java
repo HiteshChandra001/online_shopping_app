@@ -15,6 +15,20 @@ public class CustomerDetails implements UserDetails{
 		super();
 		this.customer = customer;
 	}
+	
+	
+
+	public Customer getCustomer() {
+		return customer;
+	}
+
+
+
+	public void setCustomer(Customer customer) {
+		this.customer = customer;
+	}
+
+
 
 	@Override
 	public Collection<? extends GrantedAuthority> getAuthorities() {
@@ -30,7 +44,7 @@ public class CustomerDetails implements UserDetails{
 
 	@Override
 	public String getUsername() {
-		return customer.getUser().getUserId();
+		return customer.getEmail();
 	}
 
 	@Override

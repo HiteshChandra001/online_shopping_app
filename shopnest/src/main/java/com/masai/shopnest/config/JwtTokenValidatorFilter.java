@@ -4,9 +4,9 @@ import java.io.IOException;
 
 import javax.crypto.SecretKey;
 
-import org.apache.tomcat.util.net.openssl.ciphers.Authentication;
 import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.core.Authentication;
 import org.springframework.security.core.authority.AuthorityUtils;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.filter.OncePerRequestFilter;
@@ -43,7 +43,7 @@ String jwt= request.getHeader(SecurityConstants.JWT_HEADER);
 				
 				String authorities= (String)claims.get("authorities");	
 				
-				UsernamePasswordAuthenticationToken auth = new UsernamePasswordAuthenticationToken(username, null, AuthorityUtils.commaSeparatedStringToAuthorityList(authorities));
+				Authentication auth = new UsernamePasswordAuthenticationToken(username, null, AuthorityUtils.commaSeparatedStringToAuthorityList(authorities));
 				
 				SecurityContextHolder.getContext().setAuthentication(auth);
 				

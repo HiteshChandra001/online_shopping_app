@@ -11,7 +11,7 @@ import com.masai.shopnest.entity.Customer;
 public interface CustomerRepository extends JpaRepository<Customer, Integer>{
 
 	
-	@Query("SELECT c FROM Customer c WHERE c.user.userId = :userId")
-	Optional<Customer> findByuserId(String userId);
+	Optional<Customer> findByEmail(String email);
 	
 }
+	

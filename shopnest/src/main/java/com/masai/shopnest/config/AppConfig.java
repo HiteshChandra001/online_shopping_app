@@ -6,9 +6,9 @@ import java.util.Collections;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.http.HttpMethod;
+import org.springframework.http.HttpRequest;
 import org.springframework.security.config.Customizer;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
-import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -23,7 +23,7 @@ import jakarta.servlet.http.HttpServletRequest;
 public class AppConfig {
 
 	@Bean
-	public SecurityFilterChain springSecurityConfiguration(HttpSecurity http) throws Exception {
+	 SecurityFilterChain springSecurityConfiguration(HttpSecurity http) throws Exception {
 
 		http.sessionManagement(sm -> sm.sessionCreationPolicy(SessionCreationPolicy.STATELESS)).cors(cors -> {
 
@@ -44,9 +44,10 @@ public class AppConfig {
 
 		}).authorizeHttpRequests(auth -> {
 			auth.requestMatchers(HttpMethod.POST, "/customers").permitAll()
-					.requestMatchers(HttpMethod.GET, "/customers", "/hello").hasRole("ADMIN")
-					.requestMatchers(HttpMethod.GET, "/customers/**").hasAnyRole("ADMIN", "USER").anyRequest()
-					.authenticated();
+				   .requestMatchers(HttpMethod.GET,"/products","/products/**").permitAll()
+				   	.requestMatchers(HttpMethod.POST,"/products").hasRole("ADMIN")			 
+//					.requestMatchers(HttpMethod.GET, "/customers/**").hasAnyRole("ADMIN", "USER")
+					.anyRequest().authenticated();
 
 		}).csrf(csrf -> csrf.disable()).addFilterAfter(new JwtTokenGeneratorFilter(), BasicAuthenticationFilter.class)
 				.addFilterBefore(new JwtTokenValidatorFilter(), BasicAuthenticationFilter.class)

@@ -1,5 +1,11 @@
 package com.masai.shopnest.service;
 
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Optional;
+
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
@@ -22,10 +28,20 @@ public class CustomerDetailsService implements UserDetailsService {
 
 	@Override
 	public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-		System.out.println(username);
-		Customer customer = customerRepository.findByuserId(username)
-				.orElseThrow(() -> new NotFoundException("User Not FOUND"));
-		return new CustomerDetails(customer);
+		System.out.println("reached here");
+		Optional<Customer> opt= customerRepository.findByEmail(username);
+		System.out.println("reached after finding");
+
+		Customer customer=	  opt.orElseThrow(()-> new NotFoundException("User Details not found with this username: "+username));
+	
+			List<GrantedAuthority> authorities= new ArrayList<>();	
+			
+			SimpleGrantedAuthority sga= new SimpleGrantedAuthority(customer.getUser().getRole());
+			authorities.add(sga);
+	            	
+			
+			return new CustomerDetails(customer);
+		
 	}
 
 }
