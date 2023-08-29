@@ -43,16 +43,17 @@ public class AppConfig {
 			});
 
 		}).authorizeHttpRequests(auth -> {
-			auth.requestMatchers(HttpMethod.POST, "/customers").permitAll()
-				   .requestMatchers(HttpMethod.GET,"/products","/products/**").permitAll()
-				   	.requestMatchers(HttpMethod.POST,"/products").hasRole("ADMIN")			 
-//					.requestMatchers(HttpMethod.GET, "/customers/**").hasAnyRole("ADMIN", "USER")
+			auth.requestMatchers(HttpMethod.POST, "/customers","/addresses").permitAll()
+				   .requestMatchers(HttpMethod.GET,"/products","/products/**","/address/**").permitAll()
+				   	.requestMatchers(HttpMethod.POST,"/products").hasRole("ADMIN")
+				   	.requestMatchers(HttpMethod.GET,"/customers").hasRole("ADMIN")
+					.requestMatchers(HttpMethod.GET, "/cart/**").hasAnyRole("ADMIN", "USER")
 					.anyRequest().authenticated();
 
 		}).csrf(csrf -> csrf.disable()).addFilterAfter(new JwtTokenGeneratorFilter(), BasicAuthenticationFilter.class)
 				.addFilterBefore(new JwtTokenValidatorFilter(), BasicAuthenticationFilter.class)
-				.formLogin(Customizer.withDefaults()).httpBasic(Customizer.withDefaults());
-
+                .formLogin(Customizer.withDefaults()).httpBasic(Customizer.withDefaults());
+				
 		return http.build();
 
 	}

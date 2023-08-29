@@ -20,4 +20,5 @@ public interface CustomerService {
   
   public Customer getCustomerDetailsByEmail(String email);
 
+  public List<Customer> getAllCustomer();
 }

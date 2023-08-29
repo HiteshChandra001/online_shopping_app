@@ -57,6 +57,11 @@ public class CustomerController {
 	public ResponseEntity<Customer> removeCustomer(@Valid @RequestBody Customer customer) {
 		return new ResponseEntity<Customer>(customerService.removeCustomer(customer), HttpStatus.OK);
 	}
+	
+	@GetMapping("/customers")
+	public ResponseEntity<List<Customer>> getAllCustomers(){
+		return new ResponseEntity<List<Customer>>(customerService.getAllCustomer(), HttpStatus.OK);
+	}
 
 	@GetMapping("/customers/{custId}")
 	public ResponseEntity<Customer> viewCustomer(@Valid @PathVariable int custId) {
@@ -72,11 +77,10 @@ public class CustomerController {
 	public ResponseEntity<String> getLoggedInCustomerDetailsHandler(Authentication auth){
 		
 
-		System.out.println(auth); // this Authentication object having Principle object details
-
+		
 		Customer customer = customerService.getCustomerDetailsByEmail(auth.getName());
 		
-
-		return new ResponseEntity<>(customer.getFirstName()+auth.getCredentials() + " Logged In Successfully", HttpStatus.ACCEPTED);
+                       
+		return new ResponseEntity<>(customer.getFirstName()+customer.getUser().getRole() + " Logged In Successfully", HttpStatus.ACCEPTED);
 	}
 }

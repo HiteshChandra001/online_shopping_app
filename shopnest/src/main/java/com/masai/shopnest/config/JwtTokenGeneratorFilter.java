@@ -27,7 +27,7 @@ public class JwtTokenGeneratorFilter extends OncePerRequestFilter{
 			throws ServletException, IOException {
 		
 		Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-        if (null != authentication) {
+		if (null != authentication) {
             SecretKey key = Keys.hmacShaKeyFor(SecurityConstants.JWT_KEY.getBytes());
             String jwt = Jwts.builder()
             		.setIssuer("Ram")
@@ -39,8 +39,8 @@ public class JwtTokenGeneratorFilter extends OncePerRequestFilter{
                     .signWith(key).compact();
                        
             response.setHeader(SecurityConstants.JWT_HEADER, jwt);
+            
         }
-
         filterChain.doFilter(request, response);	
 	}
 	
