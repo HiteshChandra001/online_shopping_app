@@ -29,7 +29,7 @@ Add product to the cart and purchase it .
 This app has been created by using JPA and Spring framework. Hence only a relational database can be used to store the data.
 <br>
 ER Diagram:
-<img src="https://imgur.com/a/yazbs9f">
+<blockquote class="imgur-embed-pub" lang="en" data-id="UoDRlTU"><a href="https://imgur.com/UoDRlTU">View post on imgur.com</a></blockquote><script async src="//s.imgur.com/min/embed.js" charset="utf-8"></script>
 
 
 ## Authentication:
