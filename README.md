@@ -37,3 +37,6 @@ Every service that this app provides, requires password for authentication.
 
 # Authors:
 * [Hitesh Chandra](https://github.com/HiteshChandra001)
+* [Akhil Suryan](https://github.com/akhil368)
+* [Suraj Kumar Sharma](https://github.com/geniusuraj)
+* [Rishil Patel](https://github.com/rishilpatel157)
