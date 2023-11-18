@@ -1,26 +1,20 @@
 # healthy-discovery-1593
 
-# project_name : **ShopNest**
+# project_name : **Adventure Park**
 
-This application is used by ShopNest admin and their Customer for online shopping. This application will help Customer to buy the products and view order details. Customer can register themselves and login. Add product to the cart and purchase it.This application will help Admin to search Product list ,add new products, remove products and update product.
+an application for Amusement Park Booking Activity Management & Customer Management
 
 Types of Users :
 * **Admin**
 * **Customer**
 
 * Role of Admin
-search Product list,
-add new products,
-remove products
-and update product .
-
+Amusement Activity Management
+Customer Management
 
 * Role of Customer
-buy the products
-and view order details,
-register themselves and login. 
-Add product to the cart and purchase it .
-
+view the list of available activities.
+book cab for desired amusement activity
 
 
 # Architecture and Tech Stack of the software
@@ -29,7 +23,7 @@ Add product to the cart and purchase it .
 This app has been created by using JPA and Spring framework. Hence only a relational database can be used to store the data.
 <br>
 ER Diagram:
-<img src="https://i.imgur.com/UoDRlTU.png" />
+<img src="https://imgur.com/umsgyCf.jpg" />
 
 
 ## Authentication:
@@ -39,7 +33,7 @@ Every service that this app provides, requires password for authentication.
 * Java Standard Edition, version 17
 * [Maven](https://maven.apache.org/) as the build tool
 * [MySql](https://jakarta.ee/specifications/persistence/3.0/)
-* [Spring Boot](https://hibernate.org/) as the ORM framework (but can be changed to any other ORM framework, complient with JPA)
+* [Spring Boot]
 
 # Authors:
 * [Hitesh Chandra](https://github.com/HiteshChandra001)
