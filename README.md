@@ -4,8 +4,6 @@
 
 This application is used by ShopNest admin and their Customer for online shopping. This application will help Customer to buy the products and view order details. Customer can register themselves and login. Add product to the cart and purchase it.This application will help Admin to search Product list ,add new products, remove products and update product.
 
-
-
 Types of Users :
 * **Admin**
 * **Customer**
@@ -31,7 +29,7 @@ Add product to the cart and purchase it .
 This app has been created by using JPA and Spring framework. Hence only a relational database can be used to store the data.
 <br>
 ER Diagram:
-<img src="https://i.imgur.com/MLtNO2G.png">
+<img src="https://imgur.com/5tIDU5t">
 
 
 ## Authentication:
