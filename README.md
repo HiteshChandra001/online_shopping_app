@@ -25,7 +25,7 @@ Add product to the cart and purchase it.
 This app has been created by using JPA and Spring framework. Hence only a relational database can be used to store the data.
 <br>
 ER Diagram:
-<img src="https://imgur.com/5tIDU5t.jpg" />
+<img src="https://imgur.com/5tIDU5t.png" />
 
 
 ## Authentication:
