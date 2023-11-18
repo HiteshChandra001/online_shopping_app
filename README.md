@@ -1,20 +1,22 @@
 # healthy-discovery-1593
 
-# project_name : **Adventure Park**
+# project_name : **ShopNest**
 
-an application for Amusement Park Booking Activity Management & Customer Management
+This application is used by ShopNest admin and their Customer for online shopping 
 
 Types of Users :
 * **Admin**
 * **Customer**
 
 * Role of Admin
-Amusement Activity Management
-Customer Management
+Search Product list,
+add new products,
+remove products and update products.
 
 * Role of Customer
-view the list of available activities.
-book cab for desired amusement activity
+buy the products and view order details.
+Customer can register themselves and login.
+Add product to the cart and purchase it.
 
 
 # Architecture and Tech Stack of the software
@@ -23,7 +25,7 @@ book cab for desired amusement activity
 This app has been created by using JPA and Spring framework. Hence only a relational database can be used to store the data.
 <br>
 ER Diagram:
-<img src="https://imgur.com/umsgyCf.jpg" />
+<img src="https://imgur.com/5tIDU5t.jpg" />
 
 
 ## Authentication:
