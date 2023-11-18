@@ -38,7 +38,6 @@ Every service that this app provides, requires password for authentication.
 ## Tech Stack:
 * Java Standard Edition, version 17
 * [Maven](https://maven.apache.org/) as the build tool
-* [Jakarta Persistence APIs](https://jakarta.ee/specifications/persistence/3.0/)
 * [MySql](https://jakarta.ee/specifications/persistence/3.0/)
 * [Spring Boot](https://hibernate.org/) as the ORM framework (but can be changed to any other ORM framework, complient with JPA)
 
