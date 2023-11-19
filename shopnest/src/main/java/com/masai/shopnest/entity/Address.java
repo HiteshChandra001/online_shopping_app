@@ -1,5 +1,6 @@
 package com.masai.shopnest.entity;
 
+import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -18,16 +19,22 @@ public class Address {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int addressId;
 
+	@Column(nullable=false)
 	private String streetNo;
 
+	@Column(nullable=false)
 	private String buildingName;
 
+	@Column(nullable=false,unique=true)
 	private String city;
 
+	@Column(nullable=false)
 	private String state;
 
+	@Column(nullable=false)
 	private String country;
 
+	@Column(nullable=false)
 	private String pincode;
 
 }

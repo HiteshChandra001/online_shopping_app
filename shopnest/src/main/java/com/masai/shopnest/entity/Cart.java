@@ -1,10 +1,10 @@
 package com.masai.shopnest.entity;
 
-import java.util.Map;
+import java.util.List;
 
-import jakarta.persistence.CascadeType;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import jakarta.persistence.Entity;
-import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
@@ -24,9 +24,10 @@ public class Cart {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int cartId;
 
-	@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
-	private Map<Integer, Product> product;
+	@OneToMany(mappedBy="cart")
+	private List<Product> products;
 
+	@JsonIgnore
 	@OneToOne
 	private Customer customer;
 }

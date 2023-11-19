@@ -7,18 +7,20 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.masai.shopnest.entity.Customer;
 import com.masai.shopnest.entity.Order;
 import com.masai.shopnest.exception.NotFoundException;
+import com.masai.shopnest.exception.ShopnestException;
+import com.masai.shopnest.repository.CustomerRepository;
 import com.masai.shopnest.repository.OrderRepository;
 
 @Service
 public class OrderServiceImpl implements OrderService {
 
-	OrderRepository orderRepository;
-
-	public OrderServiceImpl(@Autowired OrderRepository orderRepository) {
-		this.orderRepository = orderRepository;
-	}
+	@Autowired
+	private OrderRepository orderRepository;
+	@Autowired
+	private CustomerRepository customerRepository;
 
 	@Override
 	public Order addOrder(Order order) {
@@ -32,65 +34,38 @@ public class OrderServiceImpl implements OrderService {
 	}
 
 	@Override
-	public Order removeOrder(Order order) {
-		orderRepository.delete(order);
+	public Order removeOrder(int id) {
+		Order order = orderRepository.findById(id).orElseThrow(()->new ShopnestException("no order found with id:"+id));
+		orderRepository.deleteById(id);
 		return order;
 	}
 
 	@Override
 	public List<Order> viewAllOrders(LocalDate date) {
-		List<Order> orderList = orderRepository.findAll();
-		List<Order> orderByDate = new ArrayList<>();
-		for (Order order : orderList) {
-			LocalDate orderDate = order.getOrderDate();
-
-			if (orderDate != null && orderDate.equals(date)) {
-				orderByDate.add(order);
-			}
-		}
-
-		return orderByDate;
-
+		List<Order> list = orderRepository.findByOrderDate(date);
+		if(list.size()==0)throw new NotFoundException("no order found");
+		return list;
 	}
 
 	@Override
 	public List<Order> viewAllOrderByLocation(String loc) {
+		List<Order> list=new ArrayList<>();
+		List<Order> orders = orderRepository.findAll();
+		for(Order o:orders) {
+			if(o.getAddress().getCity().equalsIgnoreCase(loc)) list.add(o);
+		}
 		
-		if(loc== null)
-		{
-			throw new NotFoundException("Location is Not Found");
-		}
-		List<Order> orderList = orderRepository.findAll();
-		List<Order> orderByLoc = new ArrayList<>();
-		for (Order order : orderList) {
-			String Location = order.getAddress().getCity();
-
-			if (Location != null && Location.equals(loc)) {
-				orderByLoc.add(order);
-			}
-		}
-
-		return orderByLoc;
+		if(list.size()==0)throw new NotFoundException("no order found for city : "+loc);
+		
+		return list;
 	}
 
 	@Override
 	public List<Order> viewAllOrderByUserId(int userId) {
-		if(userId==0)
-		{
-			throw new NotFoundException("User ID is Invalid");
-		}
-		List<Order> orderList = orderRepository.findAll();
-		List<Order> orderByUserID = new ArrayList<>();
-		for (Order order : orderList) {
-			int id = order.getCustomer().getCustomerId();
-
-			if (id == userId) {
-				orderByUserID.add(order);
-			}
-		}
-
-		return orderByUserID;
-
+		Customer customer = customerRepository.findById(userId).orElseThrow(()->new ShopnestException("no order found with id:"+userId));
+		List<Order> list = orderRepository.findByCustomer(customer);
+		if(list.size()==0)throw new NotFoundException("no order found");
+		return list;
 	}
 
 }

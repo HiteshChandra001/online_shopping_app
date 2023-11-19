@@ -1,9 +1,9 @@
 package com.masai.shopnest.controller;
 
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -16,31 +16,25 @@ import com.masai.shopnest.entity.Address;
 import com.masai.shopnest.service.AddressService;
 
 @RestController
-@CrossOrigin(origins = "*")
 public class AddressController {
 
+	@Autowired
 	private AddressService addressService;
-
-	public AddressController(AddressService addressService) {
-		super();
-		this.addressService = addressService;
-	}
 	
-	@PostMapping("/addresses")
+	@PostMapping("/address")
 	public ResponseEntity<Address> saveAddress(@RequestBody Address address)
 	{
-		
 		return new ResponseEntity<Address>(addressService.addAddress(address),HttpStatus.CREATED);
 	}
 	
 	
-	@DeleteMapping("addresses")
-	public ResponseEntity<Address> deleteAddress(@RequestBody Address address)
+	@DeleteMapping("/address/{id}")
+	public ResponseEntity<Address> deleteAddress(@PathVariable int id)
 	{
-		return new ResponseEntity<Address>(addressService.removeAddress(address),HttpStatus.OK);
+		return new ResponseEntity<Address>(addressService.removeAddress(id),HttpStatus.OK);
 	}
 	
-	@PutMapping("/addresses")
+	@PutMapping("/address")
 	public ResponseEntity<Address> updateAddress(@RequestBody Address address)
 	{
 		return new ResponseEntity<Address>(addressService.updateAddress(address),HttpStatus.OK);

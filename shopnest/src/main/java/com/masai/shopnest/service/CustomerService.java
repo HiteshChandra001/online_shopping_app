@@ -10,13 +10,11 @@ public interface CustomerService {
 	
 	public Customer updateCustomer(Customer customer);
 	
-	public Customer removeCustomer(Customer customer);
+	public Customer removeCustomer(int id);
 	
 	public Customer viewCustomer(int custId);
 	
-	public List<Customer> viewAllCustomer(String location);
-	
-  public Customer getCustomerByUserID(String userId);
+	public List<Customer> viewAllCustomerByCity(String city);
   
   public Customer getCustomerDetailsByEmail(String email);
 

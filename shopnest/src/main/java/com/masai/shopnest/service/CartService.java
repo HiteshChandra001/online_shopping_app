@@ -6,7 +6,7 @@ import com.masai.shopnest.entity.Product;
 import java.util.List;
 
 public interface CartService {
-    Cart addProductToCart(int cartId, Product product);
+    Cart addProductToCart(int cartId, int productid);
     Cart removeProductFromCart(int cartId, int productId);
     Cart removeAllProducts(int cartId);
     List<Product> viewAllProducts(int cartId);

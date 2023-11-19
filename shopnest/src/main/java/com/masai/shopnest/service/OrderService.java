@@ -11,7 +11,7 @@ public interface OrderService {
 	
 	public Order updateOrder(Order order);
 	
-	public Order removeOrder(Order order);
+	public Order removeOrder(int order);
 	
 	public List<Order> viewAllOrders(LocalDate date);
 	

@@ -1,5 +1,6 @@
 package com.masai.shopnest.service;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -11,6 +12,7 @@ import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 import com.masai.shopnest.entity.Product;
+import com.masai.shopnest.exception.NotFoundException;
 import com.masai.shopnest.exception.ShopnestException;
 import com.masai.shopnest.repository.ProductRepository;
 
@@ -36,11 +38,8 @@ public class ProductServiceImpl implements ProductService {
 
 	@Override
 	public Product updateProduct(Product product) {
-		Optional<Product> find = productRepository.findById(product.getProductId());
-		if(!find.isPresent())throw new ShopnestException("No product found for given id");
-		Product myProduct = find.get();
-		myProduct=product;
-		return productRepository.save(myProduct);
+		Product prod = productRepository.findById(product.getProductId()).orElseThrow(()->new ShopnestException("No product found for given id: "+product.getProductId()));
+		return productRepository.save(prod);
 	}
 
 	@Override
@@ -52,16 +51,23 @@ public class ProductServiceImpl implements ProductService {
 
 	@Override
 	public List<Product> viewProductByCategory(String cname) {
-		return null;
+		List<Product> list=new ArrayList<>();
+		List<Product> products = productRepository.findAll();
+		
+		for(Product p:products) {
+			if(p.getCategory().getCategoryName().equalsIgnoreCase(cname))list.add(p);
+		}
+		
+		if(list.size()==0)throw new NotFoundException("no product found for category: "+cname);
+		
+		return list;
 	}
 
 	@Override
 	public Product removeProduct(int pid) {
-		Optional<Product> find = productRepository.findById(pid);
-		if(!find.isPresent())throw new ShopnestException("No product found for given id");
-		Product product = find.get();
-		productRepository.delete(product);
-		return product;
+		Product prod = productRepository.findById(pid).orElseThrow(()->new ShopnestException("No product found for given id: "+pid));
+		productRepository.delete(prod);
+		return prod;
 	}
 	
 }

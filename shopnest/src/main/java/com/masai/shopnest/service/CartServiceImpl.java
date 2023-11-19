@@ -1,70 +1,57 @@
 package com.masai.shopnest.service;
 
-import java.util.ArrayList;
 import java.util.List;
-import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.masai.shopnest.entity.Cart;
 import com.masai.shopnest.entity.Product;
+import com.masai.shopnest.exception.NotFoundException;
+import com.masai.shopnest.exception.ShopnestException;
 import com.masai.shopnest.repository.CartRepository;
+import com.masai.shopnest.repository.ProductRepository;
 
 @Service
 public class CartServiceImpl implements CartService {
 
     @Autowired
     private CartRepository cartRepository;
+    @Autowired
+    private ProductRepository productRepository;
+    
 
     @Override
-    public Cart addProductToCart(int cartId, Product product) {
-        Optional<Cart> optionalCart = cartRepository.findById(cartId);
+    public Cart addProductToCart(int cartId, int productid) {
+        Cart cart = cartRepository.findById(cartId).orElseThrow(()->new ShopnestException("no cart found with cart id: "+cartId));
+        Product product = productRepository.findById(productid).orElseThrow(()->new ShopnestException("no product found with product id: "+productid));
         
-        if(optionalCart.isPresent()) {
-            Cart cart = optionalCart.get();
-            cart.getProduct().put(product.getProductId(), product);
+            cart.getProducts().add(product);
             return cartRepository.save(cart);
-        }
-        
-        return null;
     }
 
     @Override
-    public Cart removeProductFromCart(int cartId, int productId) {
-        Optional<Cart> optionalCart = cartRepository.findById(cartId);
+    public Cart removeProductFromCart(int cartId, int productid) {
+    	 Cart cart = cartRepository.findById(cartId).orElseThrow(()->new ShopnestException("no cart found with cart id: "+cartId));
+         Product product = productRepository.findById(productid).orElseThrow(()->new ShopnestException("no product found with product id: "+productid));
         
-        if(optionalCart.isPresent()) {
-            Cart cart = optionalCart.get();
-            cart.getProduct().remove(productId);
-            return cartRepository.save(cart);
-        }
-       
-        return null;
+         cart.getProducts().remove(product);
+       return cartRepository.save(cart);
     }
 
     @Override
     public Cart removeAllProducts(int cartId) {
-        Optional<Cart> optionalCart = cartRepository.findById(cartId);
-        
-        if(optionalCart.isPresent()) {
-            Cart cart = optionalCart.get();
-            cart.getProduct().clear();
-            return cartRepository.save(cart);
-        }
-        
-        return null;
+    	 Cart cart = cartRepository.findById(cartId).orElseThrow(()->new ShopnestException("no cart found with cart id: "+cartId));
+         cart.getProducts().removeIf(c->true);
+         cartRepository.save(cart);
+         return cart;
     }
 
     @Override
     public List<Product> viewAllProducts(int cartId) {
-        Optional<Cart> optionalCart = cartRepository.findById(cartId);
-        
-        if(optionalCart.isPresent()) {
-            Cart cart = optionalCart.get();
-            return new ArrayList<>(cart.getProduct().values());
-        }
-        
-        return new ArrayList<>();
+    	Cart cart = cartRepository.findById(cartId).orElseThrow(()->new ShopnestException("no cart found with cart id: "+cartId));
+        List<Product> list = cart.getProducts();
+        if(list.size()==0)new NotFoundException("no product found with cart id: "+cartId);
+        return list;
     }
 }

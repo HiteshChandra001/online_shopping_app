@@ -25,41 +25,23 @@ public class AppConfig {
 	@Bean
 	 SecurityFilterChain springSecurityConfiguration(HttpSecurity http) throws Exception {
 
-		http.sessionManagement(sm -> sm.sessionCreationPolicy(SessionCreationPolicy.STATELESS)).cors(cors -> {
-
-			cors.configurationSource(new CorsConfigurationSource() {
-
-				@Override
-				public CorsConfiguration getCorsConfiguration(HttpServletRequest request) {
-					CorsConfiguration cfg = new CorsConfiguration();
-
-					cfg.setAllowedOriginPatterns(Collections.singletonList("*"));
-					cfg.setAllowedMethods(Collections.singletonList("*"));
-					cfg.setAllowCredentials(true);
-					cfg.setAllowedHeaders(Collections.singletonList("*"));
-					cfg.setExposedHeaders(Arrays.asList("Authorization"));
-					return cfg;
-				}
-			});
-
-		}).authorizeHttpRequests(auth -> {
-			auth.requestMatchers(HttpMethod.POST, "/customers").permitAll()
-				   .requestMatchers(HttpMethod.GET,"/products","/products/**").permitAll()
+		http.authorizeHttpRequests(auth -> {
+			auth.requestMatchers("/swagger-ui*/**","/v3/api-docs/**").permitAll()
+					.requestMatchers(HttpMethod.POST, "/customers").permitAll()
 				   	.requestMatchers(HttpMethod.POST,"/products").hasRole("ADMIN")			 
-//					.requestMatchers(HttpMethod.GET, "/customers/**").hasAnyRole("ADMIN", "USER")
+					.requestMatchers(HttpMethod.GET, "/customers/**").hasAnyRole("ADMIN", "USER")
 					.anyRequest().authenticated();
 
-		}).csrf(csrf -> csrf.disable()).addFilterAfter(new JwtTokenGeneratorFilter(), BasicAuthenticationFilter.class)
-				.addFilterBefore(new JwtTokenValidatorFilter(), BasicAuthenticationFilter.class)
-				.formLogin(Customizer.withDefaults()).httpBasic(Customizer.withDefaults());
-
+		}).csrf(csrf -> csrf.disable())
+		.formLogin(Customizer.withDefaults())
+		.httpBasic(Customizer.withDefaults());
+				
 		return http.build();
 
 	}
 	
 	@Bean
 	public PasswordEncoder passwordEncoder() {
-
 		return new BCryptPasswordEncoder();
 
 	}
