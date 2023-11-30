@@ -1,6 +1,4 @@
-# healthy-discovery-1593
-
-# project_name : **ShopNest**
+# Project: **ShopNest**
 
 This application is used by ShopNest admin and their Customer for online shopping 
 
@@ -15,7 +13,7 @@ remove products and update products.
 
 * Role of Customer
 buy the products and view order details.
-Customer can register themselves and login.
+Customers can register themselves and login.
 Add product to the cart and purchase it.
 
 
@@ -29,13 +27,15 @@ ER Diagram:
 
 
 ## Authentication:
-Every service that this app provides, requires password for authentication.
+Every service that this app provides, requires a password for authentication.
 
 ## Tech Stack:
 * Java Standard Edition, version 17
 * [Maven](https://maven.apache.org/) as the build tool
 * [MySql](https://jakarta.ee/specifications/persistence/3.0/)
-* [Spring Boot]
+* Spring Boot
+* Spring Security
+  
 
 # Authors:
 * [Hitesh Chandra](https://github.com/HiteshChandra001)
